@@ -2480,6 +2480,10 @@ public class VideoModule implements CameraModule,
     // Preview area is touched. Take a picture.
     @Override
     public void onSingleTapUp(View view, int x, int y) {
+        if (!Util.isVideoSnapshotSupported(mParameters)) {
+            return;
+        }
+
         if (mMediaRecorderRecording && effectsActive()) {
             new RotateTextToast(mActivity, R.string.disable_video_snapshot_hint,
                     mOrientation).show();
